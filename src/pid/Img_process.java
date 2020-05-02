@@ -5,6 +5,7 @@
  */
 package pid;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -68,11 +69,15 @@ public class Img_process {
     
     static void openNewFrame(BufferedImage subimage){
      
+        Sub_image_Gui sig = new Sub_image_Gui(new ImageIcon(subimage));
+        sig.setPreferredSize(new Dimension(624, 426));
+        sig.setVisible(true);
+      /*
         JFrame s = new JFrame();
         JLabel label = new JLabel(new ImageIcon(subimage));
         s.add(label);
         s.pack();
-        s.setVisible(true);
+        s.setVisible(true);*/
     }
     
     public static BufferedImage getHistogram(String img_path){
@@ -167,19 +172,32 @@ public class Img_process {
         
         int minx = Math.min(x_pressed, x_released);
         int miny = Math.min(y_pressed, y_released);
-        //int maxx = Math.max(x_pressed, x_released);
-        //int maxy = Math.max(y_pressed, y_released);
+        int maxx = Math.max(x_pressed, x_released);
+        int maxy = Math.max(y_pressed, y_released);
         
         Mat SrcMat = imread(label_img.toString());
         
-        
+        System.out.println("minx: "+minx+"  miny: "+miny+"  maxx: "+maxx+"  maxy: "+maxy);
         //TODO: ver posição dos pontos para desenhar retangulo, nao vai certo
-       Imgproc.rectangle(SrcMat, new Point(x_pressed, y_pressed), 
-                new Point(x_pressed + width, y_pressed + height), 
-                new Scalar(255, 255, 255), 5);
-    
+       Imgproc.rectangle(SrcMat,
+               new Point(minx, miny), 
+               new Point(maxx, maxy), 
+               new Scalar(0, 0, 255),
+               2);
+      
        
+           
        return MatToBufferedImage(SrcMat);
+    }
+    
+    
+    private void open_sig(BufferedImage bfi){
+     /*
+      Sub_image_Gui sig = new Sub_image_Gui(new ImageIcon(bfi));
+      sig.setPreferredSize(new Dimension(624, 426));
+      sig.setVisible(true);
+        */
+    
     }
 
 }

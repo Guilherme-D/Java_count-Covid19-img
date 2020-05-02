@@ -80,8 +80,10 @@ public class Gui2 extends javax.swing.JFrame {
             }
         });
 
+        scrollPane1.setForeground(new java.awt.Color(254, 254, 254));
         scrollPane1.setPreferredSize(new java.awt.Dimension(512, 400));
 
+        image_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         image_lbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         image_lbl.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         image_lbl.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -237,12 +239,12 @@ public class Gui2 extends javax.swing.JFrame {
         Img_process.getSelectedImage(x_pressed,x_released,
                 y_pressed,y_released, zoomImg);
         
-        
-        BufferedImage draw_rectangle_dragging = Img_process.draw_rectangle_dragging(x_pressed,y_pressed,x_released,y_released,zoomImg);
+        BufferedImage draw_rectangle_dragging = Img_process.draw_rectangle_dragging(x_pressed,x_released,y_pressed,y_released,zoomImg);
         ImageIcon a = new ImageIcon(draw_rectangle_dragging);
         
-        
         image_lbl.setIcon(a);
+        
+        Img_process.openNewFrame(draw_rectangle_dragging);
     }//GEN-LAST:event_image_lblMouseReleased
 
     private void image_lblMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_image_lblMouseDragged
